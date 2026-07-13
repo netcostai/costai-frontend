@@ -38,7 +38,7 @@ export function InviteShare({ inviteCode, companyName }: { inviteCode: string; c
 
   return (
     <div className="flex flex-wrap justify-center gap-2 mt-3">
-      <a href={mailtoHref} className="text-xs border border-border hover:border-foreground/30 px-3 py-1.5 rounded-md transition-colors">
+      <a href={mailtoHref} target="_blank" rel="noopener noreferrer" className="text-xs border border-border hover:border-foreground/30 px-3 py-1.5 rounded-md transition-colors">
         Email
       </a>
       <button onClick={handleCopy} className="text-xs border border-border hover:border-foreground/30 px-3 py-1.5 rounded-md transition-colors">
