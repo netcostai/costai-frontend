@@ -67,6 +67,11 @@ export default function GatewayPage() {
 
         {role === "admin" && (
           <>
+            <div className="text-center mb-6">
+              <a href="/usage" className="text-sm text-primary hover:underline">
+                View team usage →
+              </a>
+            </div>
             <PendingRequests />
             {inviteCode && (
               <div className="rounded-xl border border-border bg-surface p-4 mb-10 text-center">
