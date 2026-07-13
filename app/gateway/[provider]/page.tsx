@@ -5,12 +5,13 @@ import { useParams } from "next/navigation";
 import { Navbar } from "@/components/navbar";
 import { PROVIDERS } from "@/lib/providers";
 import { useGatewayKeys } from "@/lib/gateway-context";
+import { supabase } from "@/lib/supabase-client";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function GatewayChatPage() {
   const params = useParams<{ provider: string }>();
-  const { apiKeys } = useGatewayKeys();
+  const { connectedProviders } = useGatewayKeys();
   const provider = PROVIDERS.find((p) => p.id === params.provider);
 
   const [prompt, setPrompt] = useState("");
@@ -29,9 +30,9 @@ export default function GatewayChatPage() {
     );
   }
 
-  const apiKey = apiKeys[provider.id];
+  const connected = connectedProviders.includes(provider.id);
 
-  if (!apiKey) {
+  if (!connected) {
     return (
       <>
         <Navbar />
@@ -51,10 +52,18 @@ export default function GatewayChatPage() {
     setError(null);
     setResponse("");
     try {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+      if (!session) throw new Error("You must be signed in.");
+
       const res = await fetch(`${API_URL}/v1/proxy/chat`, {
         method: "POST",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${apiKey}` },
-        body: JSON.stringify({ prompt }),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${session.access_token}`,
+        },
+        body: JSON.stringify({ provider: provider.id, prompt }),
       });
       if (!res.ok) throw new Error("Request failed.");
       const data = await res.json();
