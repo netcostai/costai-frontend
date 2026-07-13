@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from "react";
@@ -21,7 +20,7 @@ export default function SignInPage() {
     try {
       const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
       if (signInError) throw signInError;
-      router.push("/gateway");
+      router.push("/onboarding");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Invalid email or password.");
     } finally {
