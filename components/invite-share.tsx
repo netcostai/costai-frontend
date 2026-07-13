@@ -38,23 +38,14 @@ export function InviteShare({ inviteCode, companyName }: { inviteCode: string; c
 
   return (
     <div className="flex flex-wrap justify-center gap-2 mt-3">
-      
-        href={mailtoHref}
-        className="text-xs border border-border hover:border-foreground/30 px-3 py-1.5 rounded-md transition-colors"
-      >
+      <a href={mailtoHref} className="text-xs border border-border hover:border-foreground/30 px-3 py-1.5 rounded-md transition-colors">
         Email
       </a>
-      <button
-        onClick={handleCopy}
-        className="text-xs border border-border hover:border-foreground/30 px-3 py-1.5 rounded-md transition-colors"
-      >
+      <button onClick={handleCopy} className="text-xs border border-border hover:border-foreground/30 px-3 py-1.5 rounded-md transition-colors">
         {copied ? "Copied!" : "Copy message"}
       </button>
       {canNativeShare && (
-        <button
-          onClick={handleNativeShare}
-          className="text-xs border border-border hover:border-foreground/30 px-3 py-1.5 rounded-md transition-colors"
-        >
+        <button onClick={handleNativeShare} className="text-xs border border-border hover:border-foreground/30 px-3 py-1.5 rounded-md transition-colors">
           Share...
         </button>
       )}
