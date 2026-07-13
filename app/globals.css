@@ -4,8 +4,6 @@
 
 @layer base {
   body {
-    background-color: #000000;
-    color: #ffffff;
-    font-family: sans-serif;
+    @apply bg-black text-white;
   }
 }
