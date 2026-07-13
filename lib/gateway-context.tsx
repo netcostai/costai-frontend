@@ -10,6 +10,7 @@ type GatewayContextType = {
   connectedProviders: ProviderId[];
   role: "admin" | "member" | null;
   status: "pending" | "active" | null;
+  subscriptionStatus: string | null;
   inviteCode: string | null;
   companyName: string | null;
   loading: boolean;
@@ -22,6 +23,7 @@ export function GatewayProvider({ children }: { children: ReactNode }) {
   const [connectedProviders, setConnectedProviders] = useState<ProviderId[]>([]);
   const [role, setRole] = useState<"admin" | "member" | null>(null);
   const [status, setStatus] = useState<"pending" | "active" | null>(null);
+  const [subscriptionStatus, setSubscriptionStatus] = useState<string | null>(null);
   const [inviteCode, setInviteCode] = useState<string | null>(null);
   const [companyName, setCompanyName] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -36,6 +38,7 @@ export function GatewayProvider({ children }: { children: ReactNode }) {
       setConnectedProviders([]);
       setRole(null);
       setStatus(null);
+      setSubscriptionStatus(null);
       setInviteCode(null);
       setCompanyName(null);
       setLoading(false);
@@ -51,6 +54,7 @@ export function GatewayProvider({ children }: { children: ReactNode }) {
         const me = await meRes.json();
         setRole(me.role);
         setStatus(me.status);
+        setSubscriptionStatus(me.subscription_status);
         setInviteCode(me.invite_code);
         setCompanyName(me.company_name);
 
@@ -77,7 +81,16 @@ export function GatewayProvider({ children }: { children: ReactNode }) {
 
   return (
     <GatewayContext.Provider
-      value={{ connectedProviders, role, status, inviteCode, companyName, loading, refresh }}
+      value={{
+        connectedProviders,
+        role,
+        status,
+        subscriptionStatus,
+        inviteCode,
+        companyName,
+        loading,
+        refresh,
+      }}
     >
       {children}
     </GatewayContext.Provider>
