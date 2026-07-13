@@ -1,7 +1,9 @@
 export function CtaFooter() {
   return (
-    <footer className="py-10 text-center bg-black text-white">
-      <button className="bg-white text-black px-6 py-2 rounded font-bold">Claim 14-Day Free Pilot</button>
+    <footer className="py-20 text-center">
+      <button className="bg-white text-black px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-200 transition-all shadow-lg shadow-white/10">
+        Claim 14-Day Free Pilot
+      </button>
     </footer>
   )
 }
