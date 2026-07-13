@@ -15,19 +15,24 @@ export function ProviderCard({
   displayName: string;
   color: string;
 }) {
-  const { connectedProviders, refresh } = useGatewayKeys();
+  const { connectedProviders, role, refresh } = useGatewayKeys();
   const [modalOpen, setModalOpen] = useState(false);
   const connected = connectedProviders.includes(id);
+  const isAdmin = role === "admin";
 
   return (
     <div className="rounded-2xl border border-border bg-surface p-6 flex flex-col items-center text-center">
       <div
-        className="h-14 w-14 rounded-full flex items-center justify-center text-xl font-semibold text-white mb-4"
-        style={{ backgroundColor: color }}
+        className="h-16 w-16 rounded-2xl flex items-center justify-center mb-4"
+        style={{ backgroundColor: `${color}1a`, border: `1px solid ${color}40` }}
       >
-        {displayName[0]}
+        <span className="text-2xl font-bold tracking-tight" style={{ color }}>
+          {displayName[0]}
+        </span>
       </div>
-      <h3 className="font-medium mb-1">{displayName}</h3>
+      <h3 className="font-semibold text-lg mb-1" style={{ color }}>
+        {displayName}
+      </h3>
       <p className="text-xs text-muted mb-4">{connected ? "Key connected" : "Not connected"}</p>
 
       {connected ? (
@@ -37,13 +42,15 @@ export function ProviderCard({
         >
           Open Gateway
         </Link>
-      ) : (
+      ) : isAdmin ? (
         <button
           onClick={() => setModalOpen(true)}
           className="w-full border border-border hover:border-foreground/30 text-sm font-medium py-2.5 rounded-lg transition-colors"
         >
           Add your key
         </button>
+      ) : (
+        <p className="text-xs text-muted">Ask your admin to connect this</p>
       )}
 
       {modalOpen && (
