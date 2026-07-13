@@ -54,7 +54,7 @@ export default function GatewayChatPage() {
       const res = await fetch(`${API_URL}/v1/proxy/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${apiKey}` },
-        body: JSON.stringify({ model: "gpt-4o-mini", prompt }),
+        body: JSON.stringify({ prompt }),
       });
       if (!res.ok) throw new Error("Request failed.");
       const data = await res.json();
