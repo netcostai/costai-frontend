@@ -14,7 +14,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [], // Removed the dependency that was causing the error
 } satisfies Config;
 
 export default config;
