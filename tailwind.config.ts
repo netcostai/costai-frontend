@@ -7,7 +7,14 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: {
+          DEFAULT: "#3b82f6", // Electric Blue
+          foreground: "#ffffff",
+        },
+      },
+    },
   },
   plugins: [],
 } satisfies Config;
