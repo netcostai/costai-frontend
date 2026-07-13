@@ -15,9 +15,9 @@ export function ProviderCard({
   displayName: string;
   color: string;
 }) {
-  const { hasApiKey } = useGatewayKeys();
+  const { connectedProviders, refresh } = useGatewayKeys();
   const [modalOpen, setModalOpen] = useState(false);
-  const connected = hasApiKey(id);
+  const connected = connectedProviders.includes(id);
 
   return (
     <div className="rounded-2xl border border-border bg-surface p-6 flex flex-col items-center text-center">
@@ -28,9 +28,7 @@ export function ProviderCard({
         {displayName[0]}
       </div>
       <h3 className="font-medium mb-1">{displayName}</h3>
-      <p className="text-xs text-muted mb-4">
-        {connected ? "Key connected" : "Not connected"}
-      </p>
+      <p className="text-xs text-muted mb-4">{connected ? "Key connected" : "Not connected"}</p>
 
       {connected ? (
         <Link
@@ -49,7 +47,7 @@ export function ProviderCard({
       )}
 
       {modalOpen && (
-        <AddKeyModal provider={id} displayName={displayName} onClose={() => setModalOpen(false)} />
+        <AddKeyModal provider={id} displayName={displayName} onClose={() => setModalOpen(false)} onSaved={refresh} />
       )}
     </div>
   );
