@@ -8,7 +8,7 @@ const CACHE_DISCOUNT = 0.90;
 const WHOLESALE_DISCOUNT = 0.15;
 
 const PRICE_PER_USER = 10;
-const MAX_EMPLOYEES = 4000;
+const MAX_EMPLOYEES = 1000;
 
 function calculateGrossSavingsRate() {
   return CACHEABLE_PCT * CACHE_DISCOUNT + WHOLESALE_DISCOUNT;
