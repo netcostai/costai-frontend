@@ -6,6 +6,7 @@ import { Navbar } from "@/components/navbar";
 import { PROVIDERS } from "@/lib/providers";
 import { ProviderCard } from "@/components/provider-card";
 import { PendingRequests } from "@/components/pending-requests";
+import { InviteShare } from "@/components/invite-share";
 import { useGatewayKeys } from "@/lib/gateway-context";
 import { supabase } from "@/lib/supabase-client";
 
@@ -71,6 +72,7 @@ export default function GatewayPage() {
               <div className="rounded-xl border border-border bg-surface p-4 mb-10 text-center">
                 <p className="text-sm text-muted mb-1">Invite teammates to {companyName} with this code:</p>
                 <p className="font-mono text-lg tracking-wide">{inviteCode}</p>
+                <InviteShare inviteCode={inviteCode} companyName={companyName || "our team"} />
               </div>
             )}
           </>
