@@ -23,7 +23,7 @@ const features = [
 
 export function Features() {
   return (
-    <section id="architecture" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
       <div className="grid sm:grid-cols-3 gap-6">
         {features.map(({ icon: Icon, title, description, color }) => (
           <div
