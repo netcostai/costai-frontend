@@ -1,7 +1,9 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 
 @layer base {
   body {
-    @apply bg-black text-white min-h-screen;
+    @apply bg-black text-white min-h-screen font-sans;
+    font-family: 'Inter', sans-serif; /* This is the "secret sauce" */
   }
 }
