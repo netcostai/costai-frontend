@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { GatewayProvider } from "@/lib/gateway-context";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -13,7 +14,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`dark ${inter.variable}`}>
       <body className="bg-background text-foreground font-sans">
-        {children}
+        <GatewayProvider>{children}</GatewayProvider>
       </body>
     </html>
   );
