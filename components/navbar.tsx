@@ -35,15 +35,6 @@ export function Navbar() {
           Cost<span className="text-primary">AI</span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-8 text-sm text-muted">
-          <Link href="#architecture" className="hover:text-foreground transition-colors">
-            Architecture
-          </Link>
-          <Link href="#pricing" className="hover:text-foreground transition-colors">
-            Pricing
-          </Link>
-        </nav>
-
         <div className="flex items-center gap-3">
           {!checked ? null : loggedIn ? (
             <>
