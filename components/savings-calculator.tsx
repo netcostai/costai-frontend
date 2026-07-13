@@ -38,4 +38,58 @@ export function SavingsCalculator() {
 
       <div className="mb-6">
         <div className="flex items-center justify-between mb-2">
-          <label htmlFor="employees" className="text-sm
+          <label htmlFor="employees" className="text-sm text-muted">
+            Number of employees
+          </label>
+          <input
+            type="number"
+            min={1}
+            max={MAX_EMPLOYEES}
+            value={employees}
+            onChange={(e) => setEmployees(clampEmployees(Number(e.target.value)))}
+            className="w-24 bg-background border border-border rounded-md px-2 py-1 text-sm text-right focus:outline-none focus:border-primary transition-colors"
+          />
+        </div>
+        <input
+          id="employees"
+          type="range"
+          min={1}
+          max={MAX_EMPLOYEES}
+          step={10}
+          list="employee-ticks"
+          value={employees}
+          onChange={(e) => setEmployees(Number(e.target.value))}
+          className="w-full accent-primary"
+        />
+        <datalist id="employee-ticks">
+          <option value="250" />
+          <option value="500" />
+          <option value="750" />
+        </datalist>
+        <div className="flex justify-between text-xs text-muted mt-1">
+          <span>1</span>
+          <span>{MAX_EMPLOYEES.toLocaleString()}</span>
+        </div>
+      </div>
+
+      <div className="mb-6">
+        <label htmlFor="spend" className="block text-sm text-muted mb-2">
+          Current monthly AI spend
+        </label>
+        <div className="relative">
+          <span className="absolute left-4 top-1/2 -translate-y-1/2 text-muted">$</span>
+          <input
+            id="spend"
+            type="number"
+            min={0}
+            step={100}
+            value={spend}
+            onChange={(e) => setSpend(Math.max(0, Number(e.target.value)))}
+            className="w-full bg-background border border-border rounded-lg pl-8 pr-4 py-3 text-foreground focus:outline-none focus:border-primary transition-colors"
+          />
+        </div>
+      </div>
+
+      <div className="space-y-2 mb-6 text-sm">
+        <div className="flex justify-between text-muted">
+          <span>New AI
