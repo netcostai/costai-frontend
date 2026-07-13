@@ -2,11 +2,35 @@
 
 import { useState } from "react";
 
+// --- Editable assumptions ---
+// Update these once you have real customer usage data.
+// Each *_PCT is "% of total spend that this lever applies to"
+// Each *_DISCOUNT is "how much cheaper that portion becomes"
+const CACHEABLE_PCT = 0.25;   // share of spend that's repeated/cacheable input
+const CACHE_DISCOUNT = 0.90;  // cache reads are ~90% cheaper than normal input
+
+const ROUTABLE_PCT = 0.25;    // share of spend that could run on a cheaper model
+const ROUTING_DISCOUNT = 0.75; // cheaper models can be ~75%+ cheaper per token
+
+const BATCHABLE_PCT = 0.10;   // share of spend that's non-real-time (batchable)
+const BATCH_DISCOUNT = 0.50;  // batch API pricing is typically ~50% off
+
+const WHOLESALE_DISCOUNT = 0.05; // flat pass-through margin savings on all spend
+
+function calculateBlendedSavingsRate() {
+  return (
+    CACHEABLE_PCT * CACHE_DISCOUNT +
+    ROUTABLE_PCT * ROUTING_DISCOUNT +
+    BATCHABLE_PCT * BATCH_DISCOUNT +
+    WHOLESALE_DISCOUNT
+  );
+}
+
 export function SavingsCalculator() {
   const [employees, setEmployees] = useState(25);
   const [spend, setSpend] = useState(5000);
 
-  const savingsRate = 0.55;
+  const savingsRate = calculateBlendedSavingsRate();
   const newCost = spend * (1 - savingsRate);
   const savings = spend - newCost;
 
