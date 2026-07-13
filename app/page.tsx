@@ -1,17 +1,15 @@
-import { SiteNav } from '@/components/site-nav'
-import { Hero } from '@/components/hero'
-import { SavingsCalculator } from '@/components/savings-calculator'
-import { Features } from '@/components/features'
-import { CtaFooter } from '@/components/cta-footer'
+import { Navbar } from "@/components/navbar";
+import { Hero } from "@/components/hero";
+import { Features } from "@/components/features";
+// ... (keep your other imports)
 
 export default function Page() {
   return (
-    <main className="min-h-screen bg-background">
-      <SiteNav />
+    <>
+      <Navbar />
       <Hero />
-      <SavingsCalculator />
       <Features />
-      <CtaFooter />
-    </main>
+      {/* ... (rest of your components) */}
+    </>
   )
 }
