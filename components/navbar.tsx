@@ -25,10 +25,10 @@ export function Navbar() {
             Sign in
           </Link>
           <Link
-            href="/pilot"
+            href="/gateway"
             className="text-sm font-medium bg-primary hover:bg-primary-hover text-white px-4 py-2 rounded-lg transition-colors"
           >
-            Launch Pilot
+            Launch Gateway
           </Link>
         </div>
       </div>
