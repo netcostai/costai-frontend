@@ -1,20 +1,41 @@
-export function Features() {
-  const features = [
-    { title: "90% Savings", desc: "Drastically reduce overhead by bypassing retail markups." },
-    { title: "Prompt Caching", desc: "Lower data costs instantly." },
-    { title: "Daily Limits", desc: "Control your budget." }
-  ];
+import { TrendingDown, Zap, Gauge } from "lucide-react";
 
+const features = [
+  {
+    icon: TrendingDown,
+    title: "90% Savings",
+    description: "Drastically reduce overhead by bypassing retail markups.",
+    color: "text-accent",
+  },
+  {
+    icon: Zap,
+    title: "Prompt Caching",
+    description: "Lower data costs instantly.",
+    color: "text-primary",
+  },
+  {
+    icon: Gauge,
+    title: "Daily Limits",
+    description: "Control your budget.",
+    color: "text-primary",
+  },
+];
+
+export function Features() {
   return (
-    <section className="grid grid-cols-1 md:grid-cols-3 gap-6 py-24">
-      {features.map((f, i) => (
-        <div key={i} className="group relative p-8 rounded-3xl bg-neutral-900 border border-neutral-800 overflow-hidden transition-all hover:border-primary/50">
-          {/* Subtle glow on hover */}
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          <h3 className="text-lg font-semibold mb-2 relative z-10">{f.title}</h3>
-          <p className="text-neutral-400 text-sm leading-relaxed relative z-10">{f.desc}</p>
-        </div>
-      ))}
+    <section id="architecture" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div className="grid sm:grid-cols-3 gap-6">
+        {features.map(({ icon: Icon, title, description, color }) => (
+          <div
+            key={title}
+            className="group rounded-xl border border-border bg-surface p-6 hover:bg-surface-hover hover:border-foreground/20 transition-colors"
+          >
+            <Icon className={`h-6 w-6 ${color} mb-4`} />
+            <h3 className="font-medium mb-1.5">{title}</h3>
+            <p className="text-sm text-muted">{description}</p>
+          </div>
+        ))}
+      </div>
     </section>
-  )
+  );
 }
