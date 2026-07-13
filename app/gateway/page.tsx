@@ -1,8 +1,35 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { Navbar } from "@/components/navbar";
 import { PROVIDERS } from "@/lib/providers";
 import { ProviderCard } from "@/components/provider-card";
+import { supabase } from "@/lib/supabase-client";
 
 export default function GatewayPage() {
+  const router = useRouter();
+  const [checking, setChecking] = useState(true);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (!session) {
+        router.push("/sign-in");
+      } else {
+        setChecking(false);
+      }
+    });
+  }, [router]);
+
+  if (checking) {
+    return (
+      <>
+        <Navbar />
+        <section className="max-w-5xl mx-auto px-4 py-20 text-center text-muted">Loading...</section>
+      </>
+    );
+  }
+
   return (
     <>
       <Navbar />
