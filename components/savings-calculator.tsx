@@ -92,4 +92,31 @@ export function SavingsCalculator() {
 
       <div className="space-y-2 mb-6 text-sm">
         <div className="flex justify-between text-muted">
-          <span>New AI
+          <span>New AI cost (after caching + wholesale rates)</span>
+          <span className="text-foreground">{format(newAiCost)}</span>
+        </div>
+        <div className="flex justify-between text-muted">
+          <span>CostAI platform fee ({employees} × ${PRICE_PER_USER})</span>
+          <span className="text-foreground">{format(platformFee)}</span>
+        </div>
+        <div className="flex justify-between pt-2 border-t border-border font-medium">
+          <span>Total monthly cost</span>
+          <span>{format(totalCost)}</span>
+        </div>
+      </div>
+
+      <div
+        className={`rounded-xl p-5 text-center border ${
+          isNegative ? "border-red-500/30 bg-red-500/10" : "border-accent/30 bg-accent/10"
+        }`}
+      >
+        <p className={`text-xs mb-1 ${isNegative ? "text-red-400" : "text-accent"}`}>
+          {isNegative ? "Net monthly cost increase" : "Net monthly savings"}
+        </p>
+        <p className={`text-2xl font-semibold ${isNegative ? "text-red-400" : "text-accent"}`}>
+          {format(netSavings)}
+        </p>
+      </div>
+    </div>
+  );
+}
