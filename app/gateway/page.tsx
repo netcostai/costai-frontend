@@ -10,10 +10,13 @@ import { InviteShare } from "@/components/invite-share";
 import { useGatewayKeys } from "@/lib/gateway-context";
 import { supabase } from "@/lib/supabase-client";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 export default function GatewayPage() {
   const router = useRouter();
   const [checking, setChecking] = useState(true);
-  const { role, status, inviteCode, companyName } = useGatewayKeys();
+  const [portalLoading, setPortalLoading] = useState(false);
+  const { role, status, subscriptionStatus, inviteCode, companyName } = useGatewayKeys();
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -24,6 +27,26 @@ export default function GatewayPage() {
       }
     });
   }, [router]);
+
+  async function handleManageBilling() {
+    setPortalLoading(true);
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+    if (!session) return;
+
+    const res = await fetch(`${API_URL}/v1/billing/portal`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${session.access_token}` },
+    });
+
+    if (res.ok) {
+      const { url } = await res.json();
+      window.location.href = url;
+    } else {
+      setPortalLoading(false);
+    }
+  }
 
   if (checking) {
     return (
@@ -49,6 +72,8 @@ export default function GatewayPage() {
     );
   }
 
+  const needsBilling = role === "admin" && subscriptionStatus !== "trialing" && subscriptionStatus !== "active";
+
   return (
     <>
       <Navbar />
@@ -65,12 +90,33 @@ export default function GatewayPage() {
           </p>
         </div>
 
+        {needsBilling && (
+          <div className="rounded-xl border border-red-500/30 bg-red-500/10 p-4 mb-10 text-center">
+            <p className="text-sm text-red-400 mb-2">Billing setup isn't complete yet.</p>
+            
+              href="/billing/setup"
+              className="text-sm font-medium bg-primary hover:bg-primary-hover text-white px-4 py-2 rounded-lg transition-colors inline-block"
+            >
+              Complete billing setup
+            </a>
+          </div>
+        )}
+
         {role === "admin" && (
           <>
-            <div className="text-center mb-6">
+            <div className="text-center mb-6 flex justify-center gap-4">
               <a href="/usage" className="text-sm text-primary hover:underline">
                 View team usage →
               </a>
+              {(subscriptionStatus === "trialing" || subscriptionStatus === "active") && (
+                <button
+                  onClick={handleManageBilling}
+                  disabled={portalLoading}
+                  className="text-sm text-primary hover:underline disabled:opacity-50"
+                >
+                  {portalLoading ? "Loading..." : "Manage billing →"}
+                </button>
+              )}
             </div>
             <PendingRequests />
             {inviteCode && (
