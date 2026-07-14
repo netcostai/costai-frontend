@@ -93,10 +93,7 @@ export default function GatewayPage() {
         {needsBilling && (
           <div className="rounded-xl border border-red-500/30 bg-red-500/10 p-4 mb-10 text-center">
             <p className="text-sm text-red-400 mb-2">Billing setup isn't complete yet.</p>
-            
-              href="/billing/setup"
-              className="text-sm font-medium bg-primary hover:bg-primary-hover text-white px-4 py-2 rounded-lg transition-colors inline-block"
-            >
+            <a href="/billing/setup" className="text-sm font-medium bg-primary hover:bg-primary-hover text-white px-4 py-2 rounded-lg transition-colors inline-block">
               Complete billing setup
             </a>
           </div>
@@ -109,11 +106,7 @@ export default function GatewayPage() {
                 View team usage →
               </a>
               {(subscriptionStatus === "trialing" || subscriptionStatus === "active") && (
-                <button
-                  onClick={handleManageBilling}
-                  disabled={portalLoading}
-                  className="text-sm text-primary hover:underline disabled:opacity-50"
-                >
+                <button onClick={handleManageBilling} disabled={portalLoading} className="text-sm text-primary hover:underline disabled:opacity-50">
                   {portalLoading ? "Loading..." : "Manage billing →"}
                 </button>
               )}
