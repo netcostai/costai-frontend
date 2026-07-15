@@ -124,7 +124,7 @@ export default function GatewayPage() {
 
         <div className="grid sm:grid-cols-3 gap-6">
           {PROVIDERS.map((p) => (
-            <ProviderCard key={p.id} id={p.id} displayName={p.displayName} color={p.color} />
+          <ProviderCard key={p.id} id={p.id} displayName={p.displayName} color={p.color} devConsoleUrl={p.devConsoleUrl} />
           ))}
         </div>
       </section>
