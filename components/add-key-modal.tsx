@@ -9,11 +9,13 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 export function AddKeyModal({
   provider,
   displayName,
+  devConsoleUrl,
   onClose,
   onSaved,
 }: {
   provider: ProviderId;
   displayName: string;
+  devConsoleUrl: string;
   onClose: () => void;
   onSaved: () => void;
 }) {
@@ -57,9 +59,17 @@ export function AddKeyModal({
       <div className="w-full max-w-md rounded-2xl border border-border bg-surface p-6">
         <form onSubmit={handleSubmit}>
           <h3 className="text-lg font-semibold mb-1">Add your {displayName} key</h3>
-          <p className="text-sm text-muted mb-4">
+          <p className="text-sm text-muted mb-1">
             Your key is encrypted at rest and never leaves our vault.
           </p>
+          
+            href={devConsoleUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-primary hover:underline inline-block mb-4"
+          >
+            Don't have a key? Get one from the {displayName} developer console →
+          </a>
 
           <label className="block text-sm text-muted mb-1">{displayName} API key</label>
           <input
