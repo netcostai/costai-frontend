@@ -62,12 +62,7 @@ export function AddKeyModal({
           <p className="text-sm text-muted mb-1">
             Your key is encrypted at rest and never leaves our vault.
           </p>
-          
-            href={devConsoleUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm text-primary hover:underline inline-block mb-4"
-          >
+          <a href={devConsoleUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-primary hover:underline inline-block mb-4">
             Don't have a key? Get one from the {displayName} developer console →
           </a>
 
