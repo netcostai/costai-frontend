@@ -10,10 +10,12 @@ export function ProviderCard({
   id,
   displayName,
   color,
+  devConsoleUrl,
 }: {
   id: ProviderId;
   displayName: string;
   color: string;
+  devConsoleUrl: string;
 }) {
   const { connectedProviders, role, refresh } = useGatewayKeys();
   const [modalOpen, setModalOpen] = useState(false);
@@ -54,7 +56,13 @@ export function ProviderCard({
       )}
 
       {modalOpen && (
-        <AddKeyModal provider={id} displayName={displayName} onClose={() => setModalOpen(false)} onSaved={refresh} />
+        <AddKeyModal
+          provider={id}
+          displayName={displayName}
+          devConsoleUrl={devConsoleUrl}
+          onClose={() => setModalOpen(false)}
+          onSaved={refresh}
+        />
       )}
     </div>
   );
