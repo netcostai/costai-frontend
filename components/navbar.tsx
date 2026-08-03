@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase-client";
 
@@ -31,8 +32,11 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        <Link href="/" className="text-2xl font-extrabold tracking-tighter">
-          netcost<span className="text-primary">.ai</span>
+        <Link href="/" className="flex items-center gap-2.5">
+          <Image src="/netcost-icon-web.png" alt="" width={36} height={36} />
+          <span className="text-2xl font-extrabold tracking-tighter">
+            netcost<span className="text-primary">.ai</span>
+          </span>
         </Link>
 
         <div className="flex items-center gap-3">
