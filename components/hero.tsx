@@ -41,7 +41,7 @@ export function Hero() {
             </h1>
 
             <p className="mt-6 text-lg text-muted max-w-lg">
-              CostAI routes your entire organization through a single metered gateway.
+              NetCost.ai routes your entire organization through a single metered gateway.
             </p>
 
             <div className="mt-10 flex flex-wrap items-center gap-4">
