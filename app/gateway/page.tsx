@@ -87,7 +87,7 @@ export default function GatewayPage() {
           )}
           <h1 className="text-3xl font-semibold tracking-tight mb-3">Connect a provider</h1>
           <p className="text-muted max-w-lg mx-auto">
-            Add your API key for any provider below to start routing requests through CostAI's gateway.
+Add your API key for any provider below to start routing requests through NetCost.ai's gateway.
           </p>
         </div>
 
