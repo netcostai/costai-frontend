@@ -11,10 +11,10 @@ export function InviteShare({ inviteCode, companyName }: { inviteCode: string; c
   }, []);
 
   const signupUrl = `https://netcost.ai/sign-up?invite=${inviteCode}`;
-  const message = `Join ${companyName} on CostAI Gateway. Sign up here: ${signupUrl} (invite code: ${inviteCode})`;
+  const message = `Join ${companyName} on NetCost.ai Gateway. Sign up here: ${signupUrl} (invite code: ${inviteCode})`;
 
   const mailtoHref = `mailto:?subject=${encodeURIComponent(
-    `Join ${companyName} on CostAI Gateway`
+    `Join ${companyName} on NetCost.ai Gateway`
   )}&body=${encodeURIComponent(message)}`;
 
   async function handleCopy() {
@@ -30,7 +30,7 @@ export function InviteShare({ inviteCode, companyName }: { inviteCode: string; c
 
   async function handleNativeShare() {
     try {
-      await navigator.share({ title: `Join ${companyName} on CostAI Gateway`, text: message, url: signupUrl });
+      await navigator.share({ title: `Join ${companyName} on NetCost.ai Gateway`, text: message, url: signupUrl });
     } catch {
       // User closed the share sheet without picking anything — nothing to do.
     }
