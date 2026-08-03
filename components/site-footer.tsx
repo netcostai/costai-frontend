@@ -5,7 +5,7 @@ export function SiteFooter() {
     <footer className="border-t border-border mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
         <p className="text-sm text-muted">
-          © {new Date().getFullYear()} CostAI. All rights reserved.
+          © {new Date().getFullYear()} NetCost.ai. All rights reserved.
         </p>
         <div className="flex items-center gap-6 text-sm text-muted">
           <Link href="/terms" className="hover:text-foreground transition-colors">
