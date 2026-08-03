@@ -43,7 +43,12 @@ export default function SignInPage() {
             className="w-full bg-background border border-border rounded-lg px-3 py-2 mb-4 focus:outline-none focus:border-primary"
           />
 
-          <label className="block text-sm text-muted mb-1">Password</label>
+          <div className="flex items-center justify-between mb-1">
+            <label className="text-sm text-muted">Password</label>
+            <a href="/forgot-password" className="text-xs text-primary hover:underline">
+              Forgot password?
+            </a>
+          </div>
           <input
             type="password"
             value={password}
