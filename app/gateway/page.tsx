@@ -7,6 +7,7 @@ import { PROVIDERS } from "@/lib/providers";
 import { ProviderCard } from "@/components/provider-card";
 import { PendingRequests } from "@/components/pending-requests";
 import { InviteShare } from "@/components/invite-share";
+import { DailyLimitSettings } from "@/components/daily-limit-settings";
 import { useGatewayKeys } from "@/lib/gateway-context";
 import { supabase } from "@/lib/supabase-client";
 
@@ -111,6 +112,7 @@ export default function GatewayPage() {
                 </button>
               )}
             </div>
+            <DailyLimitSettings />
             <PendingRequests />
             {inviteCode && (
               <div className="rounded-xl border border-border bg-surface p-4 mb-10 text-center">
@@ -124,7 +126,7 @@ export default function GatewayPage() {
 
         <div className="grid sm:grid-cols-3 gap-6">
           {PROVIDERS.map((p) => (
-          <ProviderCard key={p.id} id={p.id} displayName={p.displayName} color={p.color} devConsoleUrl={p.devConsoleUrl} />
+            <ProviderCard key={p.id} id={p.id} displayName={p.displayName} color={p.color} devConsoleUrl={p.devConsoleUrl} />
           ))}
         </div>
       </section>
