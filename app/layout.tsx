@@ -7,7 +7,7 @@ import { SiteFooter } from "@/components/site-footer";
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
-  title: "CostAI — Wholesale AI Pricing",
+  title: "NetCost.ai — Wholesale AI Pricing",
   description: "Route your organization through a single metered AI gateway.",
 };
 
