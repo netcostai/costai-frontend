@@ -73,11 +73,22 @@ export default function GatewayChatPage() {
       const decoder = new TextDecoder();
       let fullText = "";
 
+  let buffer = "";
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
-        fullText += decoder.decode(value, { stream: true });
-        setResponse(fullText);
+        buffer += decoder.decode(value, { stream: true });
+
+        const lines = buffer.split("\n\n");
+        buffer = lines.pop() || "";
+
+        for (const line of lines) {
+          if (!line.startsWith("data: ")) continue;
+          const data = line.slice(6);
+          if (data === "[DONE]") continue;
+          fullText += data;
+          setResponse(fullText);
+        }
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.");
