@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { SavingsCalculator } from "@/components/savings-calculator";
+import { PROVIDERS } from "@/lib/providers";
 import { supabase } from "@/lib/supabase-client";
 
 export function Hero() {
@@ -31,9 +32,18 @@ export function Hero() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-xs text-muted mb-6">
-              <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-              Now onboarding pilot customers
+            <div className="inline-flex items-center gap-3 rounded-full border border-border bg-surface px-3 py-1.5 text-xs text-muted mb-6">
+              <span>Works with</span>
+              <span className="flex items-center gap-2.5">
+                {PROVIDERS.map((p) => (
+                  <span key={p.id} className="flex items-center gap-1.5">
+                    <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: p.color }} />
+                    <span className="font-medium" style={{ color: p.color }}>
+                      {p.displayName}
+                    </span>
+                  </span>
+                ))}
+              </span>
             </div>
 
             <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight text-gradient">
