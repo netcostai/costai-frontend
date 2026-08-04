@@ -66,9 +66,19 @@ export default function GatewayChatPage() {
         },
         body: JSON.stringify({ provider: provider.id, prompt }),
       });
-      if (!res.ok) throw new Error("Request failed.");
-      const data = await res.json();
-      setResponse(data.response);
+
+      if (!res.ok || !res.body) throw new Error("Request failed.");
+
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let fullText = "";
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        fullText += decoder.decode(value, { stream: true });
+        setResponse(fullText);
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.");
     } finally {
