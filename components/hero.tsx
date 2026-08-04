@@ -29,16 +29,16 @@ export function Hero() {
     <section id="pricing" className="relative overflow-hidden">
       <div className="absolute inset-0 -z-10 [background:radial-gradient(60%_50%_at_50%_0%,rgba(59,130,246,0.15),transparent)]" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-4">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
-            <div className="inline-flex items-center gap-3 rounded-full border border-border bg-surface px-3 py-1.5 text-xs text-muted mb-6">
+            <div className="inline-flex items-center gap-3 rounded-full border border-border bg-surface px-4 py-2 text-sm text-muted mb-6">
               <span>Works with</span>
-              <span className="flex items-center gap-2.5">
+              <span className="flex items-center gap-3">
                 {PROVIDERS.map((p) => (
                   <span key={p.id} className="flex items-center gap-1.5">
-                    <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: p.color }} />
-                    <span className="font-medium" style={{ color: p.color }}>
+                    <span className="h-2 w-2 rounded-full" style={{ backgroundColor: p.color }} />
+                    <span className="font-semibold" style={{ color: p.color }}>
                       {p.displayName}
                     </span>
                   </span>
