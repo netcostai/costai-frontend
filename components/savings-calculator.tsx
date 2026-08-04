@@ -2,14 +2,13 @@
 
 import { useState } from "react";
 
-// --- Editable assumptions ---
 const HEAVY_USER_SHARE = 0.10;
 const HEAVY_USER_USAGE_PCT = 0.90;
 const LIGHT_USER_USAGE_PCT = 0.05;
 
 const WHOLESALE_DISCOUNT = 0.15;
 
-const PRICE_PER_USER = 7; // CostAI platform fee, $/employee/month
+const PRICE_PER_USER = 7;
 const MAX_EMPLOYEES = 1000;
 
 function calculateAvgUsagePct() {
@@ -123,11 +122,11 @@ export function SavingsCalculator() {
           <span className="text-foreground">{format(wholesaleCost)}</span>
         </div>
         <div className="flex justify-between text-muted">
-          <span>CostAI platform fee ({employees} × ${PRICE_PER_USER})</span>
+          <span>NetCost.ai platform fee ({employees} × ${PRICE_PER_USER})</span>
           <span className="text-foreground">{format(platformFee)}</span>
         </div>
         <div className="flex justify-between pt-2 border-t border-border font-medium">
-          <span>Total monthly cost with CostAI</span>
+          <span>Total monthly cost with NetCost.ai</span>
           <span>{format(totalWithCostAI)}</span>
         </div>
       </div>
