@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useParams } from "next/navigation";
+import ReactMarkdown from "react-markdown";
 import { Navbar } from "@/components/navbar";
 import { PROVIDERS } from "@/lib/providers";
 import { useGatewayKeys } from "@/lib/gateway-context";
@@ -106,8 +107,32 @@ export default function GatewayChatPage() {
         {error && <p className="text-sm text-red-400 mb-4">{error}</p>}
 
         {response && (
-          <div className="rounded-xl border border-border bg-surface p-5 whitespace-pre-wrap text-sm">
-            {response}
+          <div className="rounded-xl border border-border bg-surface p-5 text-sm leading-relaxed">
+            <ReactMarkdown
+              components={{
+                p: ({ children }) => <p className="mb-3 last:mb-0">{children}</p>,
+                strong: ({ children }) => <strong className="font-semibold text-foreground">{children}</strong>,
+                em: ({ children }) => <em className="italic">{children}</em>,
+                ul: ({ children }) => <ul className="list-disc list-outside pl-5 mb-3 space-y-1">{children}</ul>,
+                ol: ({ children }) => <ol className="list-decimal list-outside pl-5 mb-3 space-y-1">{children}</ol>,
+                li: ({ children }) => <li>{children}</li>,
+                h1: ({ children }) => <h1 className="text-lg font-semibold mb-2 mt-4 first:mt-0">{children}</h1>,
+                h2: ({ children }) => <h2 className="text-base font-semibold mb-2 mt-4 first:mt-0">{children}</h2>,
+                h3: ({ children }) => <h3 className="text-sm font-semibold mb-2 mt-3 first:mt-0">{children}</h3>,
+                code: ({ children }) => (
+                  <code className="bg-background border border-border rounded px-1.5 py-0.5 text-xs font-mono">
+                    {children}
+                  </code>
+                ),
+                a: ({ children, href }) => (
+                  <a href={href} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+                    {children}
+                  </a>
+                ),
+              }}
+            >
+              {response}
+            </ReactMarkdown>
           </div>
         )}
       </section>
