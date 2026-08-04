@@ -1,6 +1,5 @@
 import { Navbar } from "@/components/navbar";
 import { Hero } from "@/components/hero";
-import { SupportedProviders } from "@/components/supported-providers";
 import { Features } from "@/components/features";
 
 export default function Page() {
@@ -8,7 +7,6 @@ export default function Page() {
     <>
       <Navbar />
       <Hero />
-      <SupportedProviders />
       <Features />
     </>
   );
