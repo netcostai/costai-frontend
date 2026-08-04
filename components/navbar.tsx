@@ -40,7 +40,7 @@ export function Navbar() {
             <>
               <Link
                 href="/gateway"
-                className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block"
+                className="text-sm font-medium bg-primary hover:bg-primary-hover text-white px-4 py-2 rounded-lg transition-colors"
               >
                 Gateway
               </Link>
