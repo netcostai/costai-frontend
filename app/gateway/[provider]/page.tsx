@@ -66,30 +66,9 @@ export default function GatewayChatPage() {
         },
         body: JSON.stringify({ provider: provider.id, prompt }),
       });
-
-      if (!res.ok || !res.body) throw new Error("Request failed.");
-
-      const reader = res.body.getReader();
-      const decoder = new TextDecoder();
-      let fullText = "";
-
-  let buffer = "";
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        buffer += decoder.decode(value, { stream: true });
-
-        const lines = buffer.split("\n\n");
-        buffer = lines.pop() || "";
-
-        for (const line of lines) {
-          if (!line.startsWith("data: ")) continue;
-          const data = line.slice(6);
-          if (data === "[DONE]") continue;
-          fullText += data;
-          setResponse(fullText);
-        }
-      }
+      if (!res.ok) throw new Error("Request failed.");
+      const data = await res.json();
+      setResponse(data.response);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.");
     } finally {
@@ -114,15 +93,35 @@ export default function GatewayChatPage() {
           onChange={(e) => setPrompt(e.target.value)}
           placeholder="Ask something..."
           rows={4}
-          className="w-full bg-surface border border-border rounded-lg p-4 mb-4 focus:outline-none focus:border-primary transition-colors"
+          disabled={loading}
+          className="w-full bg-surface border border-border rounded-lg p-4 mb-4 focus:outline-none focus:border-primary transition-colors disabled:opacity-60"
         />
 
         <button
           onClick={handleSend}
           disabled={loading || !prompt}
-          className="w-full bg-primary hover:bg-primary-hover text-white font-medium py-3 rounded-lg transition-colors disabled:opacity-50 mb-6"
+          className="w-full bg-primary hover:bg-primary-hover text-white font-medium py-3 rounded-lg transition-colors disabled:opacity-70 mb-6 flex items-center justify-center gap-2"
         >
-          {loading ? "Sending..." : "Send"}
+          {loading ? (
+            <>
+              <svg
+                className="animate-spin h-4 w-4 text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                />
+              </svg>
+              Thinking...
+            </>
+          ) : (
+            "Send"
+          )}
         </button>
 
         {error && <p className="text-sm text-red-400 mb-4">{error}</p>}
