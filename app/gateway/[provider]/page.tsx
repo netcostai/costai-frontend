@@ -93,12 +93,11 @@ export default function GatewayChatPage() {
     <>
       <Navbar />
       <section className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-2 text-sm text-muted mb-4">
-            <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-            Gateway — powered by {provider.displayName}
+        <div className="flex justify-center mt-6 mb-10">
+          <div className="inline-flex items-center gap-3 rounded-full border border-border bg-surface px-6 py-3 text-base text-muted">
+            <span className="h-2.5 w-2.5 rounded-full bg-accent" />
+            Powered by {provider.displayName}
           </div>
-          <h1 className="text-2xl font-semibold">Try your gateway</h1>
         </div>
 
         <textarea
