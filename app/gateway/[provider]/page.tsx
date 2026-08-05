@@ -19,6 +19,7 @@ export default function GatewayChatPage() {
   const [response, setResponse] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
 
   if (!provider) {
     return (
@@ -52,6 +53,7 @@ export default function GatewayChatPage() {
     setLoading(true);
     setError(null);
     setResponse("");
+    setCopied(false);
     try {
       const {
         data: { session },
@@ -73,6 +75,17 @@ export default function GatewayChatPage() {
       setError(err instanceof Error ? err.message : "Something went wrong.");
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function handleCopy() {
+    try {
+      await navigator.clipboard.writeText(response);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // Clipboard permission can fail in some browser contexts; button
+      // stays as "Copy" so the user can try again or copy manually.
     }
   }
 
@@ -153,6 +166,15 @@ export default function GatewayChatPage() {
             >
               {response}
             </ReactMarkdown>
+
+            <div className="flex justify-end mt-4 pt-3 border-t border-border">
+              <button
+                onClick={handleCopy}
+                className="text-xs font-medium border border-border hover:border-foreground/30 px-3 py-1.5 rounded-md transition-colors"
+              >
+                {copied ? "Copied!" : "Copy response"}
+              </button>
+            </div>
           </div>
         )}
       </section>
