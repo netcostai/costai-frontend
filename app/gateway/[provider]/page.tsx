@@ -175,17 +175,9 @@ export default function GatewayChatPage() {
 
         {imageBase64 && (
           <div className="rounded-xl border border-border bg-surface p-5">
-            <img
-              src={`data:image/png;base64,${imageBase64}`}
-              alt="Generated"
-              className="w-full rounded-lg mb-4"
-            />
+            <img src={`data:image/png;base64,${imageBase64}`} alt="Generated" className="w-full rounded-lg mb-4" />
             <div className="flex justify-end pt-3 border-t border-border">
-              
-                href={`data:image/png;base64,${imageBase64}`}
-                download="generated-image.png"
-                className="text-xs font-medium border border-border hover:border-foreground/30 px-3 py-1.5 rounded-md transition-colors"
-              >
+              <a href={`data:image/png;base64,${imageBase64}`} download="generated-image.png" className="text-xs font-medium border border-border hover:border-foreground/30 px-3 py-1.5 rounded-md transition-colors">
                 Download image
               </a>
             </div>
