@@ -10,13 +10,17 @@ import { supabase } from "@/lib/supabase-client";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
+type Mode = "text" | "image";
+
 export default function GatewayChatPage() {
   const params = useParams<{ provider: string }>();
   const { connectedProviders } = useGatewayKeys();
   const provider = PROVIDERS.find((p) => p.id === params.provider);
 
+  const [mode, setMode] = useState<Mode>("text");
   const [prompt, setPrompt] = useState("");
   const [response, setResponse] = useState("");
+  const [imageBase64, setImageBase64] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
@@ -53,6 +57,7 @@ export default function GatewayChatPage() {
     setLoading(true);
     setError(null);
     setResponse("");
+    setImageBase64(null);
     setCopied(false);
     try {
       const {
@@ -66,11 +71,16 @@ export default function GatewayChatPage() {
           "Content-Type": "application/json",
           Authorization: `Bearer ${session.access_token}`,
         },
-        body: JSON.stringify({ provider: provider.id, prompt }),
+        body: JSON.stringify({ provider: provider.id, prompt, mode }),
       });
       if (!res.ok) throw new Error("Request failed.");
       const data = await res.json();
-      setResponse(data.response);
+
+      if (data.type === "image") {
+        setImageBase64(data.image_base64);
+      } else {
+        setResponse(data.response);
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.");
     } finally {
@@ -100,10 +110,33 @@ export default function GatewayChatPage() {
           </div>
         </div>
 
+        {provider.supportsImageGeneration && (
+          <div className="flex justify-center mb-6">
+            <div className="inline-flex rounded-lg border border-border p-1">
+              <button
+                onClick={() => setMode("text")}
+                className={`text-sm px-4 py-1.5 rounded-md transition-colors ${
+                  mode === "text" ? "bg-primary text-white" : "text-muted"
+                }`}
+              >
+                Text
+              </button>
+              <button
+                onClick={() => setMode("image")}
+                className={`text-sm px-4 py-1.5 rounded-md transition-colors ${
+                  mode === "image" ? "bg-primary text-white" : "text-muted"
+                }`}
+              >
+                Image
+              </button>
+            </div>
+          </div>
+        )}
+
         <textarea
           value={prompt}
           onChange={(e) => setPrompt(e.target.value)}
-          placeholder="Ask something..."
+          placeholder={mode === "image" ? "Describe the image you want..." : "Ask something..."}
           rows={4}
           disabled={loading}
           className="w-full bg-surface border border-border rounded-lg p-4 mb-4 focus:outline-none focus:border-primary transition-colors disabled:opacity-60"
@@ -129,14 +162,35 @@ export default function GatewayChatPage() {
                   d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
                 />
               </svg>
-              Thinking...
+              {mode === "image" ? "Generating..." : "Thinking..."}
             </>
+          ) : mode === "image" ? (
+            "Generate Image"
           ) : (
             "Send"
           )}
         </button>
 
         {error && <p className="text-sm text-red-400 mb-4">{error}</p>}
+
+        {imageBase64 && (
+          <div className="rounded-xl border border-border bg-surface p-5">
+            <img
+              src={`data:image/png;base64,${imageBase64}`}
+              alt="Generated"
+              className="w-full rounded-lg mb-4"
+            />
+            <div className="flex justify-end pt-3 border-t border-border">
+              
+                href={`data:image/png;base64,${imageBase64}`}
+                download="generated-image.png"
+                className="text-xs font-medium border border-border hover:border-foreground/30 px-3 py-1.5 rounded-md transition-colors"
+              >
+                Download image
+              </a>
+            </div>
+          </div>
+        )}
 
         {response && (
           <div className="rounded-xl border border-border bg-surface p-5 text-sm leading-relaxed">
