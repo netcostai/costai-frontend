@@ -29,7 +29,7 @@ export default function GatewayChatPage() {
     return (
       <>
         <Navbar />
-        <section className="max-w-3xl mx-auto px-4 py-20 text-center">
+        <section className="max-w-4xl mx-auto px-4 py-20 text-center">
           <p className="text-muted">Unknown provider.</p>
         </section>
       </>
@@ -42,7 +42,7 @@ export default function GatewayChatPage() {
     return (
       <>
         <Navbar />
-        <section className="max-w-3xl mx-auto px-4 py-20 text-center">
+        <section className="max-w-4xl mx-auto px-4 py-20 text-center">
           <h1 className="text-2xl font-semibold mb-3">No key connected yet</h1>
           <p className="text-muted mb-6">Add your {provider.displayName} key first from the gateway page.</p>
           <a href="/gateway" className="text-primary hover:underline">
@@ -102,7 +102,7 @@ export default function GatewayChatPage() {
   return (
     <>
       <Navbar />
-      <section className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="flex justify-center mt-6 mb-10">
           <div className="inline-flex items-center gap-3 rounded-full border border-border bg-surface px-6 py-3 text-base text-muted">
             <span className="h-2.5 w-2.5 rounded-full bg-accent" />
