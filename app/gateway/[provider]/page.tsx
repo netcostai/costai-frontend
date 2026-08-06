@@ -29,7 +29,7 @@ export default function GatewayChatPage() {
     return (
       <>
         <Navbar />
-        <section className="max-w-2xl mx-auto px-4 py-20 text-center">
+        <section className="max-w-3xl mx-auto px-4 py-20 text-center">
           <p className="text-muted">Unknown provider.</p>
         </section>
       </>
@@ -42,7 +42,7 @@ export default function GatewayChatPage() {
     return (
       <>
         <Navbar />
-        <section className="max-w-2xl mx-auto px-4 py-20 text-center">
+        <section className="max-w-3xl mx-auto px-4 py-20 text-center">
           <h1 className="text-2xl font-semibold mb-3">No key connected yet</h1>
           <p className="text-muted mb-6">Add your {provider.displayName} key first from the gateway page.</p>
           <a href="/gateway" className="text-primary hover:underline">
@@ -102,7 +102,7 @@ export default function GatewayChatPage() {
   return (
     <>
       <Navbar />
-      <section className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <section className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="flex justify-center mt-6 mb-10">
           <div className="inline-flex items-center gap-3 rounded-full border border-border bg-surface px-6 py-3 text-base text-muted">
             <span className="h-2.5 w-2.5 rounded-full bg-accent" />
@@ -139,7 +139,7 @@ export default function GatewayChatPage() {
           placeholder={mode === "image" ? "Describe the image you want..." : "Ask something..."}
           rows={4}
           disabled={loading}
-          className="w-full bg-surface border border-border rounded-lg p-4 mb-4 focus:outline-none focus:border-primary transition-colors disabled:opacity-60"
+          className="w-full bg-surface border border-border rounded-lg p-4 mb-4 text-base focus:outline-none focus:border-primary transition-colors disabled:opacity-60"
         />
 
         <button
@@ -174,7 +174,7 @@ export default function GatewayChatPage() {
         {error && <p className="text-sm text-red-400 mb-4">{error}</p>}
 
         {imageBase64 && (
-          <div className="rounded-xl border border-border bg-surface p-5">
+          <div className="rounded-xl border border-border bg-surface p-6">
             <img src={`data:image/png;base64,${imageBase64}`} alt="Generated" className="w-full rounded-lg mb-4" />
             <div className="flex justify-end pt-3 border-t border-border">
               <a href={`data:image/png;base64,${imageBase64}`} download="generated-image.png" className="text-xs font-medium border border-border hover:border-foreground/30 px-3 py-1.5 rounded-md transition-colors">
@@ -185,20 +185,20 @@ export default function GatewayChatPage() {
         )}
 
         {response && (
-          <div className="rounded-xl border border-border bg-surface p-5 text-sm leading-relaxed">
+          <div className="rounded-xl border border-border bg-surface p-6 sm:p-8 text-base leading-relaxed">
             <ReactMarkdown
               components={{
-                p: ({ children }) => <p className="mb-3 last:mb-0">{children}</p>,
+                p: ({ children }) => <p className="mb-4 last:mb-0">{children}</p>,
                 strong: ({ children }) => <strong className="font-semibold text-foreground">{children}</strong>,
                 em: ({ children }) => <em className="italic">{children}</em>,
-                ul: ({ children }) => <ul className="list-disc list-outside pl-5 mb-3 space-y-1">{children}</ul>,
-                ol: ({ children }) => <ol className="list-decimal list-outside pl-5 mb-3 space-y-1">{children}</ol>,
+                ul: ({ children }) => <ul className="list-disc list-outside pl-6 mb-4 space-y-1.5">{children}</ul>,
+                ol: ({ children }) => <ol className="list-decimal list-outside pl-6 mb-4 space-y-1.5">{children}</ol>,
                 li: ({ children }) => <li>{children}</li>,
-                h1: ({ children }) => <h1 className="text-lg font-semibold mb-2 mt-4 first:mt-0">{children}</h1>,
-                h2: ({ children }) => <h2 className="text-base font-semibold mb-2 mt-4 first:mt-0">{children}</h2>,
-                h3: ({ children }) => <h3 className="text-sm font-semibold mb-2 mt-3 first:mt-0">{children}</h3>,
+                h1: ({ children }) => <h1 className="text-xl font-semibold mb-3 mt-5 first:mt-0">{children}</h1>,
+                h2: ({ children }) => <h2 className="text-lg font-semibold mb-3 mt-5 first:mt-0">{children}</h2>,
+                h3: ({ children }) => <h3 className="text-base font-semibold mb-2 mt-4 first:mt-0">{children}</h3>,
                 code: ({ children }) => (
-                  <code className="bg-background border border-border rounded px-1.5 py-0.5 text-xs font-mono">
+                  <code className="bg-background border border-border rounded px-1.5 py-0.5 text-sm font-mono">
                     {children}
                   </code>
                 ),
@@ -212,7 +212,7 @@ export default function GatewayChatPage() {
               {response}
             </ReactMarkdown>
 
-            <div className="flex justify-end mt-4 pt-3 border-t border-border">
+            <div className="flex justify-end mt-5 pt-4 border-t border-border">
               <button
                 onClick={handleCopy}
                 className="text-xs font-medium border border-border hover:border-foreground/30 px-3 py-1.5 rounded-md transition-colors"
