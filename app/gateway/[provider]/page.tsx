@@ -99,6 +99,13 @@ export default function GatewayChatPage() {
     }
   }
 
+  const fontClass =
+    provider.id === "openai"
+      ? "font-provider-openai"
+      : provider.id === "anthropic"
+      ? "font-provider-anthropic"
+      : "font-provider-google";
+
   return (
     <>
       <Navbar />
@@ -185,7 +192,7 @@ export default function GatewayChatPage() {
         )}
 
         {response && (
-          <div className="text-lg leading-relaxed">
+          <div className={`${fontClass} text-lg leading-relaxed`}>
             <ReactMarkdown
               components={{
                 p: ({ children }) => <p className="mb-5 last:mb-0">{children}</p>,
@@ -212,7 +219,7 @@ export default function GatewayChatPage() {
               {response}
             </ReactMarkdown>
 
-            <div className="flex justify-end mt-6 pt-4 border-t border-border">
+            <div className="flex justify-end mt-6 pt-4 border-t border-border font-sans">
               <button
                 onClick={handleCopy}
                 className="text-xs font-medium border border-border hover:border-foreground/30 px-3 py-1.5 rounded-md transition-colors"
